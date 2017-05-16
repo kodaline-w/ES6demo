@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>ES6面向对象选项卡</title>
+	<style type="text/css">
+	.on{ background-color: #5da8ec}
+	#box div{width: 400px;height: 400px;background-color: #cfe2f3;display: none;}
+	#box2 div{width: 400px;height: 400px;background-color: #cfe2f3;display: none;}
+	#box input,#box2 input{padding: 10px; font-size: 20px;border:none;}
+	#box input:hover,#box2 input:hover{background-color: #2081d9;}
+	</style>
+	<script>
+		class Tab{
+			constructor(id){
+				this.oBox=document.getElementById(id);
+				this.oBtn=this.oBox.getElementsByTagName('input');
+				this.oDiv=this.oBox.getElementsByTagName('div');
+				this.iNow=-1;
+				this.init();
+			}
+			init(){
+				for (let i = 0; i < this.oBtn.length; i++) {
+					
+					this.oBtn[i].onclick=function(){
+						this.iNow=i;
+						this.hide();
+						this.show(i);
+					}.bind(this)
+				}
+			}
+			hide(){
+				for (let i = 0; i < this.oBtn.length; i++) {
+					this.oBtn[i].className='';
+					this.oDiv[i].style.display='none'
+				}
+			}
+			show(index){
+				this.oBtn[index].className='on';
+				this.oDiv[index].style.display='block';
+			}
+		}
+		class Tab2 extends Tab{
+			constructor(id){
+				super(id);
+				setInterval(this.next.bind(this),3000)
+			}
+			next(){
+				this.iNow++;
+				if (this.iNow==this.oBtn.length) {this.iNow=0};
+				this.hide();
+				this.show(this.iNow)
+			}
+		}
+		window.onload=function(){
+			new Tab('box')
+			var at=new Tab2('box2');
+			at.next()
+		}
+	</script>
+</head>
+<body>
+<div id="box">
+	<input type="button" value="音乐" class="on">
+	<input type="button" value="美术">
+	<input type="button" value="电影">
+	<div style="display: block">我有一个朋友
+	三年前认识他的时候
+	他还不像现在这样消瘦
+	他总是低着头
+	翻一翻手机里过去的相片
+	发几条微博，记录着自己的生活
+	他总是一个人过着
+	没事就听一听安静的歌
+	在每一个孤独的夜晚
+	他总是喝多了酒
+	</div>
+	<div>在这幅画中，天地间的景象化作了浓厚、有力的颜料浆，顺着画笔跳动的轨迹，而涌起阵阵旋涡。整个画面，似乎被一股汹涌、动荡的激流所吞噬。风景在发狂，山在骚动，月亮、星云在旋转，而那翻卷缭绕、直上云端的柏树，看起来像是一团巨大的黑色火舌，反映出画家躁动不安的情感和狂迷的幻觉世界。
+	</div>
+	<div>《搏击俱乐部》是20世纪福斯电影公司于1999年发行的一部悬疑惊悚片，电影改编自恰克·帕拉尼克的同名小说，由大卫·芬奇执导，布拉德·皮特、爱德华·诺顿、海伦娜·伯翰·卡特等主演。</div>
+</div>
+<div id="box2">
+	<input type="button" value="音乐" class="on">
+	<input type="button" value="美术">
+	<input type="button" value="电影">
+	<div style="display: block">我有一个朋友
+	三年前认识他的时候
+	他还不像现在这样消瘦
+	他总是低着头
+	翻一翻手机里过去的相片
+	发几条微博，记录着自己的生活
+	他总是一个人过着
+	没事就听一听安静的歌
+	在每一个孤独的夜晚
+	他总是喝多了酒
+	</div>
+	<div>在这幅画中，天地间的景象化作了浓厚、有力的颜料浆，顺着画笔跳动的轨迹，而涌起阵阵旋涡。整个画面，似乎被一股汹涌、动荡的激流所吞噬。风景在发狂，山在骚动，月亮、星云在旋转，而那翻卷缭绕、直上云端的柏树，看起来像是一团巨大的黑色火舌，反映出画家躁动不安的情感和狂迷的幻觉世界。
+	</div>
+	<div>《搏击俱乐部》是20世纪福斯电影公司于1999年发行的一部悬疑惊悚片，电影改编自恰克·帕拉尼克的同名小说，由大卫·芬奇执导，布拉德·皮特、爱德华·诺顿、海伦娜·伯翰·卡特等主演。</div>
+</div>	
+</body>
+</html>
